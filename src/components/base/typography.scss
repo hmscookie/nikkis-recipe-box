@@ -1,0 +1,26 @@
+/*
+* Typography Styles
+*/
+@import 'base/scss-mixins-functions';
+
+@include font-face('Domine Bold', 'adelle-sans-bold', $weight: 700);
+// @include font-face('Domine Bold', 'adelle-sans-bold-italic', $weight: 750);
+@include font-face('Domine Bold', 'adelle-sans-semibold', $weight: 600);
+// @include font-face('Domine Bold', 'adelle-sans-semibold-italic', $weight: 650);
+@include font-face('Domine Bold', 'adelle-sans-italic', $weight: 500);
+@include font-face('Domine Bold', 'adelle-sans-regular', $weight: 400);
+
+
+// @include font-face('Domine Bold', 'OpenSans-Bold', $weight: 700)
+
+$adelle-sans: 'Domine Bold', 'Helvetica', 'Arial', sans-serif;
+
+//Body Copy 
+ html {
+ 	font-family: $adelle-sans;
+ 	font-weight: 400;
+ 	font-size: 16px; 
+ 	line-height: 24px;
+ }
+
+

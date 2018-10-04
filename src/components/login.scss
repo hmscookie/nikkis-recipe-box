@@ -1,0 +1,11 @@
+//Login Container Styles 
+
+.login-container {
+  display: flex;
+  @include breakpoint(tablet) {
+    .right-side,
+    .left-side {
+      width: 50%;
+    }
+  }
+}

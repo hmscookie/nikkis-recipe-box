@@ -1,0 +1,112 @@
+/**
+ * Breakpoint mixin
+ *
+ * Based on the Bootstrap Mixin for breakpoints
+ * Reference: https://medium.com/developing-with-sass/creating-a-dead-simple-sass-mixin-to-handle-responsive-breakpoints-889927b37740#.dt7ray8bg
+ *
+ * @param string $image Name of the image without the file extension
+ * @param string $imageLocation Image file location (defaults to '../../assets/img/')
+ * @param string $size Image size (css background-size) (defaults to 'auto auto')
+ *
+ * Usage: @include breakpoint(mobile); - BP name
+ * Usage: @include breakpoint(520px); - Min Width
+ * Usage: @include breakpoint(520px, 920px); - Min/Max width
+ * Usage: @include breakpoint(520px, 920px, 1);  - Min/Max width + max offset
+ * Usage: @include breakpoint(mobile, true); - BP name with Desktop first approach
+ */
+
+ $grid: (
+	bigMobile: 540px,
+	tablet: 768px,
+	desktop: 992px,
+	bigDesktop: 1296px,
+	mobileGutter: 24px,
+	bigMobileGutter: 24px,
+	tabletGutter: 24px,
+	desktopGutter: 24px,
+	bigDesktopGutter: 24px,
+	mobileSideSpacing: 24px,
+	bigMobileSideSpacing: 24px,
+	tabletSideSpacing: 24px,
+	desktopSideSpacing: 24px,
+	bigDesktopSideSpacing: 24px,
+	mobileStretch: 100%,
+	bigMobileStretch: 100%,
+	tabletStretch: 100%,
+	desktopStretch: 100%,
+	bigDesktopStretch: 100%,
+	mobileMaxWidth: 100%,
+	bigMobileMaxWidth: 100%,
+	tabletMaxWidth: 100%,
+	desktopMaxWidth: 100%,
+	bigDesktopMaxWidth: 1248px
+);
+
+
+ @mixin breakpoint($min: 0, $max: 0, $maxoffset: 0) {
+  $type: type-of($min);
+  $desktopFirst: $max == true;
+
+  @if $type == string {
+    @if $min == mobile {
+      @media (max-width: (map_get($grid, bigMobile) - 1)) { @content; }
+    }
+
+    @else if $min == bigmobile {
+      @if $desktopFirst == true {
+        @media (max-width: map_get($grid, bigMobile) - 1) { @content; }
+      }
+      @else {
+        @media (min-width: map_get($grid, bigMobile)) { @content; }
+      }
+    }
+
+    @else if $min == tablet {
+      @if $desktopFirst == true {
+        @media (max-width: map_get($grid, tablet) - 1) { @content; }
+      }
+      @else {
+        @media (min-width: map_get($grid, tablet)) { @content; }
+      }
+    }
+
+    @else if $min == desktop {
+      @if $desktopFirst == true {
+        @media (max-width: map_get($grid, desktop) - 1) { @content; }
+      }
+      @else {
+        @media (min-width: map_get($grid, desktop)) { @content; }
+      }
+    }
+
+    @else if $min == bigdesktop {
+      @if $desktopFirst == true {
+        @media (max-width: map_get($grid, bigDesktop) - 1) { @content; }
+      }
+      @else {
+        @media (min-width: map_get($grid, bigDesktop)) { @content; }
+      }   
+    }
+
+    @else {
+      @warn "Breakpoint mixin supports: mobile, bigmobile, tablet, desktop, bigdesktop";
+    }
+  }
+
+  @else if $type == number {
+    $query: "all" !default;
+    @if $min != 0 and $max != 0 {
+      $query: "(min-width: #{$min}) and (max-width: #{$max - $maxoffset})";
+    }
+    @else if $min != 0 and $max == 0 {
+      $query: "(min-width: #{$min})";
+    }
+    @else if $min == 0 and $max != 0 {
+      $query: "(max-width: #{$max - $maxoffset})";
+    }
+    @media #{$query} {
+      @content;
+    }
+  }
+
+}
