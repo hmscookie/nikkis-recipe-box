@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
-import Login from './components/Login';
+import SignInScreen from './components/SignInScreen';
 import './App.scss';
+
 
 class App extends Component {
   render() {
@@ -9,7 +10,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Header />
-          <Login />
+          <SignInScreen />
         </header>
       </div>
     );

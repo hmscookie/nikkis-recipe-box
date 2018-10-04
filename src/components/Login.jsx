@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-
+import * as firebaseui from 'firebaseui';
 
 class Login extends Component {
 
@@ -11,7 +10,35 @@ class Login extends Component {
 
   componentDidMount() {
     const emailText = document.getElementById('email');
-    console.log(emailText);
+    const passwordText = document.getElementById('password');
+    const btnLogin = document.getElementById('login');
+    const btnSignup = document.getElementById('signup');
+    const btnLogout = document.getElementById('logout');
+
+    btnLogin.addEventListener('click', e => {
+      //get meial and passwoed
+      const email = emailText.value;
+      const pass = passwordText.value;
+      const auth = firebaseui.auth.AuthUI();
+
+      const promise = auth.signInWithEmailAndPassword(email, pass);
+
+      promise.catch(e => console.log(e.message));
+
+    });
+
+    btnSignup.addEventListener('click', e => {
+      e.preventDefault();
+      //get meial and passwoed
+      const email = emailText.value;
+      const pass = passwordText.value;
+      const auth = firebaseui.AuthUI();
+
+      const promise = auth.signInWithEmailAndPassword(email, pass);
+
+      promise.catch(e => console.log(e.message));
+
+    });
   }
 
   
@@ -22,7 +49,7 @@ class Login extends Component {
       <div className="login-container">
         <form className="left-side" action="">
           <label htmlFor="email">email address</label>
-          <input ref={this.textInput} type="password" name="email" id="email"/>
+          <input ref={this.textInput} type="email" name="email" id="email"/>
 
           <label htmlFor="password">password</label>
           <input type="password" name="password" id="password"/>

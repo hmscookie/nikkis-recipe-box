@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "firebase": "^5.5.2",
+    "firebaseui": "^3.4.1",
     "husky": "^1.1.0",
     "lint-staged": "^7.3.0",
     "node-sass": "^4.9.3",
@@ -11,6 +12,7 @@
     "re-base": "^4.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-firebaseui": "^3.0.7",
     "react-scripts": "2.0.3"
   },
   "scripts": {
